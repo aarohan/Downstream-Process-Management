@@ -1,0 +1,157 @@
+class max{
+public static double value;
+public static int sy1;
+public static int sy2;
+public static int sy3;
+public static int sy4;
+public static int sy5;
+public static int h1;
+public static int pc1;
+public static double pfr5;
+public static double pfr2;
+public static double pfr4;
+public static int rbc5;
+public static int rbc4;
+public static int rbc2;
+public static int runt3;
+
+public static void setmax(double max_value,int max_sy1, int max_sy2, int max_sy3, int max_sy4, int max_sy5,int max_h1,int max_pc1, double max_pfr5, double max_pfr2, double max_pfr4,int max_rbc5, int max_rbc4, int max_rbc2, int max_runt3){
+    value=max_value;
+    sy1=max_sy1;
+    sy2=max_sy2;
+    sy3=max_sy3;
+    sy4=max_sy4;
+    sy5=max_sy5;
+    h1=max_h1;
+    pc1=max_pc1;
+    pfr5=max_pfr5;
+    pfr2=max_pfr2;
+    pfr4=max_pfr4;
+    rbc5=max_rbc5;
+    rbc4=max_rbc4;
+    rbc2=max_rbc2;
+    runt3=max_runt3;
+}
+
+public static void printparameters(){
+    System.out.println();
+    System.out.println("Parameters for this value are: sy1 = "+sy1+" sy2 = "+sy2+" sy3 = "+sy3+" sy4 = "+sy4+" sy5 = "+sy5+" h1 = "+h1+" pc1 = "+pc1+" pfr5 = "+pfr5+" pfr4 = "+pfr4+" rbc5 = "+rbc5+" rbc 4 = "+rbc4+" rbc 2= "+rbc2);
+
+}
+
+}
+package javaapplication1;
+
+import java.util.Scanner;
+public class Main {
+public static double value=0;
+public static int sy1;
+public static int sy1_start;
+public static int sy1_end;
+public static int sy2;
+public static int sy2_start;
+public static int sy2_end;
+public static int sy3;
+public static int sy3_start;
+public static int sy3_end;
+public static int sy4;
+public static int sy4_start;
+public static int sy4_end;
+public static int sy5;
+public static int sy5_start;
+public static int sy5_end;
+public static int h1; //1 to 4
+public static int pc1;
+public static int pc1_start;
+public static int pc1_end;
+public static double pfr5;
+public static double pfr2;
+public static double pfr4;
+public static int rbc5;
+public static int rbc4;
+public static int rbc2;
+public static int runt3;
+public static int runt3_start;
+public static int runt3_end;
+
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter Sy1 Start");
+        sy1_start=scan.nextInt();
+        System.out.println("Enter Sy2 Start");
+        sy2_start=scan.nextInt();
+        System.out.println("Enter Sy3 Start");
+        sy3_start=scan.nextInt();
+        System.out.println("Enter Sy4 Start");
+        sy4_start=scan.nextInt();
+        System.out.println("Enter Sy5 Start");
+        sy5_start=scan.nextInt();
+        System.out.println("Enter Sy1 End");
+        sy1_end=scan.nextInt();
+        System.out.println("Enter Sy2 End");
+        sy2_end=scan.nextInt();
+        System.out.println("Enter Sy3 End");
+        sy3_end=scan.nextInt();
+        System.out.println("Enter Sy4 End");
+        sy4_end=scan.nextInt();
+        System.out.println("Enter Sy5 End");
+        sy5_end=scan.nextInt();
+        System.out.println("Enter PC1 Start");
+        pc1_start=scan.nextInt();
+        System.out.println("Enter PC1 End");
+        pc1_end=scan.nextInt();
+        System.out.println("Enter RUNT Start");
+        runt3_start=scan.nextInt();
+        System.out.println("Enter RUNT end");
+        runt3_end=scan.nextInt();
+
+        for(sy1=sy1_start;sy1<=sy1_end;++sy1){
+            for(sy2=sy2_start;sy2<=sy2_end;sy2++){
+                for(sy3=sy3_start;sy3<=sy3_end;sy3++){
+                    for(sy4=sy4_start;sy4<=sy4_end;sy4++){
+                        for(sy5=sy5_start;sy5<=sy5_end;sy5++){
+                            for(h1=1;h1<=4;++h1){
+                                for(pc1=pc1_start;pc1<=pc1_end;++pc1){
+                                    for(pfr5=0.03;pfr5<=0.06;pfr5+=0.005){
+                                        for(pfr2=0.06;pfr2<=0.12;pfr2+=0.005){
+                                            for(pfr4=0.04;pfr4<=0.08;pfr4+=0.005){
+                                                for(rbc5=5;rbc5<=10;++rbc5){
+                                                    for(rbc4=20;rbc4<=30;++rbc4){
+                                                        for(rbc2=50;rbc2<=100;++rbc2){
+                                                            for(runt3=runt3_start;runt3<=runt3_end;++runt3){
+                                                                double new_value=calculate();
+                                                                if(new_value<value){
+                                                                    max.setmax(new_value, sy1, sy2, sy3, sy4, sy5, h1, pc1, pfr5, pfr2, pfr4, rbc5, rbc4, rbc2, runt3);
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        System.out.println("Calculated minimum value is: "+max.value);
+        max.printparameters();
+    }
+
+    public static double calculate(){
+        double final_value=0;
+        double term1=((20*sy1*sy2*sy3*sy4*h1*pc1)+(rbc5*100000000*0.6))/(100000000*rbc5*pfr5);
+        double term2=((20*sy1*sy2*sy3*h1*pc1)+(rbc4*1000000))/(1000000*pfr4*rbc4);
+        double term3=(runt3 + 170);
+        double term4=((13*sy1*pc1*h1)+(rbc2*100))/(pfr2*rbc2*100);
+        final_value=term1+term2+term3+term4;
+        System.out.println("Computing Minimum value for sy1 = "+sy1+" sy2 = "+sy2+" sy3 = "+sy3+" sy4 = "+sy4+" sy5 = "+sy5+" h1 = "+h1+" pc1 = "+pc1+" pfr5 = "+pfr5+" pfr4 = "+pfr4+" rbc5 = "+rbc5+" rbc4= "+rbc4+" rbc2="+rbc2);
+        System.out.println("Value Computed is:"+final_value);
+        return final_value;
+    }
+}
